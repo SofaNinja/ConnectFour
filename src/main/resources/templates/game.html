@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Connect Four</title>
+  <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.0-alpha2/dist/css/bootstrap.css}">
+  <style>
+    body {
+      background-color: rgb(53, 54, 58);";
+    }
+    .chip {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background-color: rgba(26.5, 27, 29, 0.4);
+    }
+    .chip.red {
+      background-color: red;
+    }
+    .chip.blue {
+      background-color: blue;
+    }
+    table {
+      overflow: hidden; transform: translate(-50%, -50%);
+      border-radius: 8px; width: 325px; height: 325px;
+      position: fixed; background-color: dimgray;
+      top: 50%; left: 50%;
+    }
+  </style>
+</head>
+<body>
+
+<table>
+  <div class="chip" th:classappend="${currentSide == 'red' ? 'red' : 'blue'}"></div>
+
+  <tr th:each="row : ${field}">
+    <td th:each="chip : ${row}">
+      <a th:href="@{/click_chip(y=${chip.getY()})}">
+        <div class="chip"
+             th:classappend="${chip.side == null ? '' : (chip.side == 'red' ? 'red' : 'blue')}">
+        </div>
+      </a>
+    </td>
+  </tr>
+</table>
+</body>
+</html>
